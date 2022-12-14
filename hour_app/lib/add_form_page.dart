@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'meal.dart';
+
 //Define a custom form widget.
 class AddFormPage extends StatefulWidget {
-  const AddFormPage({super.key});
+  const AddFormPage({super.key, required this.meals});
+
+  final List<Meal> meals;
 
   @override
   State<AddFormPage> createState() => _AddFormPageState();
@@ -43,6 +47,9 @@ class _AddFormPageState extends State<AddFormPage> {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
+                      );
+                      widget.meals.add(
+                        Meal("test", "testing"),
                       );
                     }
                   },
