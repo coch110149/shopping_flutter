@@ -21,6 +21,8 @@ class _AddFormPageState extends State<AddFormPage> {
   // Note: This is a `GlobalKey<FormState>`,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
+  final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,16 @@ class _AddFormPageState extends State<AddFormPage> {
                     }
                     return null;
                   },
+                  controller: _titleController,
+                ),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "value was null or empty";
+                    }
+                    return null;
+                  },
+                  controller: _descriptionController,
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -49,7 +61,8 @@ class _AddFormPageState extends State<AddFormPage> {
                         const SnackBar(content: Text('Processing Data')),
                       );
                       widget.meals.add(
-                        Meal("test", "testing"),
+                        Meal(
+                            _titleController.text, _descriptionController.text),
                       );
                     }
                   },
